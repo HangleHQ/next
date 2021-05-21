@@ -1,0 +1,14 @@
+:root {
+    --primary: #181D27;
+    --secondary: #820933;
+    --pink: #D84797;
+    --white: #D2FDFF;
+    --blue: #3ABEFF;
+    --blue2: #26FFE6;
+    --purple: #B8B3E9;
+}
+
+* {
+    background-color: var(--primary);
+    color: var(--white)
+}

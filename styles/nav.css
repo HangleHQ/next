@@ -1,0 +1,19 @@
+#channelbar {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    background-color: #2F2963 !important;
+    padding: 10px;
+    vertical-align: center;
+    padding-top: 14px;
+    justify-content: space-between;
+}
+
+
+#channelbar * {
+    background-color: #2F2963 !important;
+}
+
+#channelbar-right {
+    display: inline-flex;
+}
