@@ -1,7 +1,8 @@
 #channelbar {
-    width: 100%;
+    width: calc(100% - 60px);
     height: 50px;
     display: flex;
+    margin-left: 60px;
     background-color: #2F2963 !important;
     padding: 10px;
     vertical-align: center;
@@ -9,6 +10,9 @@
     justify-content: space-between;
 }
 
+:root {
+    --full: 100%;
+}
 
 #channelbar * {
     background-color: #2F2963 !important;
@@ -16,4 +20,67 @@
 
 #channelbar-right {
     display: inline-flex;
+}
+
+#serverbar {
+    width: 60px;
+    position: absolute;
+    height: 100%;
+    background-color: #1C1F33;
+}
+
+#serverbar * {
+    background-color: #1C1F33;
+}
+
+.noGuildIcon {
+    padding-top: 20px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+}
+
+.noGuildIconItemWrapper, .noGuildIconItemWrapper * {
+    background-color: var(--secondary) !important;
+}
+
+.noGuildIconItemWrapper {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.noGuildIconText {
+    text-overflow: clip !important;
+}
+
+.channelmap {
+    margin-left: 60px;
+    position: absolute;
+    padding: 10px;
+    width: 200px;
+    background-color: #050517;
+    height: calc(var(--full) - 50px) !important; /* lol this isnt working*/
+}
+
+.channel {
+    display: flex;
+    background-color: #050517;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 35px;
+    align-items: center;
+    width: 180px;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.channel:hover {
+    background-color: #1C1F33;
 }

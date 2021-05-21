@@ -5,12 +5,15 @@ import {
     Channel,
     IDS
 } from '../../../types'
-import { getGuild, getUser } from '../../../utils/gateway'
+import { getGuild, getUser, getMessages } from '../../../utils/gateway'
 
 
 import Loading from '../../../components/loading'
 import ChannelBar from '../../../components/ChannelBar'
 import ServerBar from '../../../components/ServerBar'
+import ChannelMap from '../../../components/ChannelMap'
+import Messages from '../../../components/msg/Messages';
+import ChatBox from '../../../components/ChatBox'
 
 export default function channel({ gateway }) {
 
@@ -26,12 +29,13 @@ export default function channel({ gateway }) {
 
     let [loading, setLoading] = React.useState<boolean>(true)
     let [validRouter, setValidRouter] = React.useState<boolean>(false)
+    let [LoadingMessages, setLoadingMessages] = React.useState<boolean>(true)
 
     // guild / channel / user related
     let [guild, setGuild] = React.useState<Guild>({})
     let [channel, setChannel] = React.useState<Channel>({})
     let [user, setUser] = React.useState<any>({}) // for now use any cuz im lazy
-
+    let [messages, setMessages] = React.useState([]);
 
     let [ids, setIds] = React.useState<IDS>({})
 
@@ -56,7 +60,6 @@ export default function channel({ gateway }) {
     }, [router])
 
 
-
     React.useEffect(() => { // everything `first fetch` related
 
         if (!ids.guild) return;
@@ -65,15 +68,98 @@ export default function channel({ gateway }) {
             if (guild._error) console.log('INVALID SERVER');
             else {
                 setGuild(guild);
+                let c = guild.channels.find(x => x.id == ids.channel)
+
+                setChannel(c)
                 getUser(gateway).then(user => {
                     setUser(user)
-                    setLoading(false)
+                    getMessages(c.id, gateway).then(msgs => {
+                        setLoading(false)
+                        setMessages(msgs)
+                        setLoadingMessages(false)
+
+
+                        try {
+                            let msgd = document.getElementById('messages');
+                            if (!msgd) return;
+                            msgd.scrollTop = msgd?.scrollHeight
+                        } catch { }
+                    })
+
                 })
-                
+
             }
         })
 
     }, [validRouter, ids])
+
+
+
+
+
+
+    gateway.ws.onmessage = (evt => {
+        let msg = JSON.parse(evt.data);
+
+        switch (msg.op) {
+
+
+            case 6:
+                if (msg.d.channel_id !== ids.channel) return;
+
+                setMessages(msgs => [...msgs, msg.d])
+                break;
+
+        }
+
+    })
+
+
+    function changeServer(id) {
+
+        ids.guild = id;
+        setLoadingMessages(true)
+
+        getGuild(ids.guild, gateway).then(guild => {
+            if (guild._error) console.log('INVALID SERVER');
+            else {
+                setGuild(guild);
+
+                setChannel(guild.dfchn)
+                getMessages(guild.dfchn, gateway).then(msgs => {
+                    setLoading(false)
+                    setMessages(msgs)
+                    setLoadingMessages(false)
+
+                    try {
+                        let msgd = document.getElementById('messages');
+                        if (!msgd) return;
+                        msgd.scrollTop = msgd?.scrollHeight
+                    } catch { }
+
+                })
+
+            }
+        })
+
+    }
+
+    function changeChannel(id) {
+        setLoadingMessages(true)
+        id = String(id)
+        setChannel(id);
+
+        getMessages(id, gateway).then(msgs => {
+            setLoading(false)
+            setMessages(msgs)
+            setLoadingMessages(false)
+
+
+            let msgd = document.getElementById('messages');
+            msgd.scrollTop = msgd.scrollHeight
+
+        })
+    }
 
     if (loading) return <Loading />
 
@@ -85,10 +171,32 @@ export default function channel({ gateway }) {
         <>
 
 
-            <ServerBar user={user} />
+            <ServerBar user={user} change={changeServer} />
 
             <ChannelBar channel={{ name: 'swag' }} guild={guild} />
 
+            <ChannelMap guild={guild} channel={channel} change={changeChannel} />
+
+            {
+                LoadingMessages ?
+                    <div id="loadingBars">
+                        <span className="loadingInline">
+                            <span className="loadingCircle" />
+                            <span className="loadingBarSmall" />
+                        </span>
+                        <br/><br/>
+                        <span className="loadingBarSmall" />
+                        <br />
+                        <span className="loadingBarImage" />
+                    </div>
+                    :
+                    <Messages messages={messages} />
+            }
+
+
+
+
+            <ChatBox gateway={gateway} ids={ids} />
 
         </>
     );

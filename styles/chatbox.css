@@ -1,0 +1,14 @@
+.chatbox {
+    position: absolute;
+    bottom: 0;
+    margin-left: 260px;
+    width: calc(100% - 260px);
+}
+
+.chatbox input {
+    width: 100%;
+    height: 40px;
+    border: none;
+    padding: 4px;
+    background-color: #363636;
+}

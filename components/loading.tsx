@@ -13,9 +13,9 @@ export default function Loading() {
                     <h1>Connecting to Hangle...</h1>
                     <p>
                         We're loading your conversations, please wait. Having problems?
-                Take a look at the{" "}
-                        <a href="https://docs.hangle.me/docs/troubleshooting/connecting">
-                            troubleshooting guide
+                        Take a look at the{" "}
+                        <a href="https://hangle.me/docs/troubleshooting/connecting">
+                        troubleshooting guide
                 </a>
                 .
               </p>

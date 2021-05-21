@@ -1,6 +1,9 @@
 import '../styles/globals.css'
 import '../styles/colors.css'
 import '../styles/nav.css'
+import '../styles/msg.css'
+import '../styles/chatbox.css'
+import '../styles/loading.css'
 
 
 
@@ -68,7 +71,7 @@ function Hangle({ Component, pageProps }) {
 
 function generate_token(length) {
   //edit the token allowed characters
-  var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890._-".split("");
+  var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890._-!%[]()".split("");
   var b = [];
   for (var i = 0; i < length; i++) {
     var j = (Math.random() * (a.length - 1)).toFixed(0);

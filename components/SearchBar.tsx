@@ -15,6 +15,8 @@ export default function Searchbar({ guild, channel }) {
                             <input
                             name="search"
                             onChange={props.handleChange}
+                            autoComplete="off"
+                            placeholder="search"
                             />
                         </form>
                     )
