@@ -4,6 +4,7 @@ import '../styles/nav.css'
 import '../styles/msg.css'
 import '../styles/chatbox.css'
 import '../styles/loading.css'
+import '../styles/landing.css'
 
 
 
@@ -109,6 +110,7 @@ class wshost {
   }
 
   async mount() {
+    this.ws = null;
     this.ws = new WebSocket(`${window.CONFIG.GATEWAY_URL}?encoding=${this.encoding}&v=${this.version}&nocompression`)
 
     // basic event logging
@@ -153,6 +155,8 @@ class wshost {
           if (callback != null) {
             callback();
           }
+        } else if (self.ws?.readyState === 3) {
+          self.mount(); // reestablish gateway connection
         } else {
           console.log("[Gateway] connecting..")
           self.wsready(callback);

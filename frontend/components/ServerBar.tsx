@@ -5,6 +5,12 @@ export default function ServerBar({ user, change }) {
 
     return (
         <div id="serverbar">
+            <div id="atme">
+                <img
+                
+                />
+            </div>
+            <hr />
             {
                 user.servers.map(guild => {
 

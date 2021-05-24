@@ -1,0 +1,58 @@
+#landingHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+#landingHeaderItems, #landingHeaderSocials {
+    padding: 15px;
+}
+
+#logoText {
+    font-weight: 600;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#landingDownload {
+    cursor: pointer;
+}
+
+#landingHeaderSocials {
+    display: flex;
+}
+
+#loginButton, #landingHeaderSocials .vertDiv {
+    height: 20px;
+    border-left: 2px solid #000;
+}
+
+#landingContent {
+    display: flex;
+    margin: 0 auto;
+    width: 20%;
+    text-align: center;
+    margin-top: 150px;
+    flex-direction: column;
+}
+
+#landingMainText {
+    font-weight: 600;
+    font-size: 35px;
+}
+
+#landingSignup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#landingSignup input {
+    height: 30px;
+    border: none;
+    margin-top: 10px;
+}
+
+#landingSignup button {
+    
+}

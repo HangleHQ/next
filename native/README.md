@@ -1,0 +1,1 @@
+# this is literally just the `npx react-native init` tree

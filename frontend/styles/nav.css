@@ -3,11 +3,12 @@
     height: 50px;
     display: flex;
     margin-left: 60px;
-    background-color: #2F2963 !important;
+    background-color: #201c33 !important;
     padding: 10px;
     vertical-align: center;
     padding-top: 14px;
     justify-content: space-between;
+    border-bottom: 1px solid #000 ;
 }
 
 :root {
@@ -15,7 +16,7 @@
 }
 
 #channelbar * {
-    background-color: #2F2963 !important;
+    background-color: #201c33 !important;
 }
 
 #channelbar-right {
@@ -64,7 +65,7 @@
     position: absolute;
     padding: 10px;
     width: 200px;
-    background-color: #050517;
+    background-color: #17141f;
     height: calc(var(--full) - 50px) !important; /* lol this isnt working*/
 }
 
