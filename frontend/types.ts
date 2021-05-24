@@ -14,7 +14,8 @@ interface Guild {
 
 
 interface Channel {
-    id?: string
+    id?: string,
+    name?: string,
 }
 
 interface IDS {

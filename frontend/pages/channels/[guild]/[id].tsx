@@ -6,7 +6,7 @@ import {
     IDS
 } from '../../../types'
 import { getGuild, getUser, getMessages } from '../../../utils/gateway'
-
+import Head from 'next/head'
 
 import Loading from '../../../components/loading'
 import ChannelBar from '../../../components/ChannelBar'
@@ -169,6 +169,23 @@ export default function channel({ gateway }) {
 
     return (
         <>
+
+        <Head>
+
+            <title>
+                { guild.name } &bull; { channel.name } - Hangle
+            </title>
+
+                { /* Meta tags for dynamic embeds.. (discord doesnt have this xD) */ }
+
+                <meta property="og:title" content="Hangle" />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={`${window.CONFIG.BASE_URL}/channels/${guild.id}/${channel.id}`} />
+
+                <meta property="og:description" content={`${guild.name} / ${channel.name} at hangle!\n\n add channel desc here later lol`} />
+
+                <meta name="theme-color" content="#820933" />
+        </Head>
 
 
             <ServerBar user={user} change={changeServer} />
