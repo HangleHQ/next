@@ -1,32 +1,29 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
+    "outDir": "./dist",
+    "target": "es5",
     "lib": [
       "dom",
-      "es6",
-      "es2017",
-      "esnext.asynciterable"
+      "dom.iterable",
+      "esnext"
     ],
-    "sourceMap": true,
-    "outDir": "./dist",
-    "moduleResolution": "node",
-    "removeComments": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "noImplicitThis": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "rootDir": "src",
     "esModuleInterop": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "baseUrl": "."
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "noImplicitAny": false
   },
-  "exclude": [
-    "node_modules"
-  ],
+  "include": [
+    "src/**/*.ts",
+    "src/utils/overlay/*"
+  ]
 }

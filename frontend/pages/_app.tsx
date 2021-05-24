@@ -5,11 +5,13 @@ import '../styles/msg.css'
 import '../styles/chatbox.css'
 import '../styles/loading.css'
 import '../styles/landing.css'
+import '../styles/electron-header.css'
 
 
 
-import uuid from 'uuid'
+import isElectron from 'is-electron'
 import React from 'react';
+import { ElectronHeader } from '../components/ElectronHeader'
 
 
 interface config {
@@ -36,12 +38,12 @@ function Hangle({ Component, pageProps }) {
   if (process.browser) {
 
     window.CONFIG = {
-      API_URL: 'http://localhost:3000/api',
+      API_URL: 'https://hangle.me/api',
       API_VERSION: 1,
       GATEWAY_URL: 'wss://gateway.hangle.me',
       GATEWAY_VERSION: 1,
       GATEWAY_ENCODING: 'json',
-      BASE_URL: 'http://localhost:3000',
+      BASE_URL: 'https://hangle.me',
     }
 
     window.CONFIG.LOADING_IMAGE = `${window.CONFIG.BASE_URL}/hangle.png`
@@ -57,11 +59,27 @@ function Hangle({ Component, pageProps }) {
      */
 
 
-    return <Component
-      {...pageProps}
-      gateway={wss}
+    /**
+     * we do a little electron
+     */
 
-    />
+    let electron = isElectron();
+
+    return (
+      <>
+
+        <ElectronHeader />
+        { electron ? <br /> : null}
+
+        <Component
+          {...pageProps}
+          gateway={wss}
+
+        />
+
+      </>
+
+    )
 
 
   } else return null

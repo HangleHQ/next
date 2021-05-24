@@ -1,1 +1,0 @@
-tsc --outDir ./dist && electron ./dist
