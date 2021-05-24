@@ -1,4 +1,4 @@
-import Render from '../../../components/MainChatRender'
+import Render from '../../components/MainChatRender'
 
 export default function ME ({ gateway }) {
 

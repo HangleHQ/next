@@ -9,7 +9,8 @@ interface GuildMember {
 interface Guild {
     id?: string,
     name?: string,
-    members?: GuildMember[] // -> Array of filled with GuildMember
+    members?: GuildMember[], // -> Array of filled with GuildMember
+    channels?: any[],
 }
 
 

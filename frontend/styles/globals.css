@@ -64,3 +64,8 @@ a {
   width: 50%;
   margin: 0 auto;
 }
+
+#homePageContent {
+  margin-left: 60px;
+  padding: 30px;
+}
