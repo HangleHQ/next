@@ -40,8 +40,6 @@ function App() {
               s.push(u);
             }
           }
-
-          console.log(u);
         });
         setSpeakers(s);
       }

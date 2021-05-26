@@ -169,12 +169,13 @@ class wshost {
     setTimeout(
       function () {
         if (self.ws?.readyState === 1) {
-          console.log("Connection is made")
+          self.logger('Gateway', 'Connection Established')
           if (callback != null) {
             callback();
           }
         } else if (self.ws?.readyState === 3) {
           self.mount(); // reestablish gateway connection
+          self.logger(`Gateway`, `Gateway connection seems to have disconnected. retrying`)
         } else {
           console.log("[Gateway] connecting..")
           self.wsready(callback);

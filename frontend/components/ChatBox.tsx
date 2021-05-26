@@ -12,7 +12,7 @@ export default function ChatBox({ gateway, ids }) {
         const message = {
           content: values.name.replace("{shrug}", "¯\\_(ツ)_/¯"),
           channel: {
-            id: ids.channel,
+            id: ids.id,
           },
         };
 

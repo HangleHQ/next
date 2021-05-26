@@ -48,9 +48,7 @@ export default function channel({ gateway }) {
     React.useEffect(() => {  //router validation
         if (router.route === '/channels/me') {
             setIsHome(true);
-            console.log(isHome)
         }
-        console.log(isHome)
         if (router.asPath !== router.route) {
             setValidRouter(true);
 
@@ -63,6 +61,7 @@ export default function channel({ gateway }) {
             // -> [3] -> channel id
 
             setIsHome(false)
+            console.log(split)
             setIds({ guild: split[1], channel: split[2] })
 
 
@@ -72,19 +71,12 @@ export default function channel({ gateway }) {
 
     React.useEffect(() => { // everything `first fetch` related
 
-
-
-        console.log(isHome)
-
         if (isHome) {
 
             setTimeout(() => {
 
-                console.log(isHome, user)
-
                 getUser(gateway).then(user => {
                     setUser(user);
-                    console.log(user)
                     setLoading(false);
                 })
 
@@ -97,13 +89,16 @@ export default function channel({ gateway }) {
                 if (guild._error) console.log('INVALID SERVER');
                 else {
                     setGuild(guild);
-                    console.log(guild)
                     let c = guild.channels.find(x => x.id == ids.channel)
 
                     setChannel(c)
                     getUser(gateway).then(user => {
                         setUser(user)
-                        if (!c) return;
+                        if (!c) {
+                            setIsHome(true);
+                            URLBarUtils('me')
+                            return
+                        }
                         getMessages(c.id, gateway).then(msgs => {
                             setLoading(false)
                             setMessages(msgs)
@@ -138,7 +133,7 @@ export default function channel({ gateway }) {
 
 
             case 6:
-                if (msg.d.channel_id !== ids.channel) return;
+                if (msg.d.channel_id !== channel.id) return;
 
                 setMessages(msgs => [...msgs, msg.d])
                 break;
@@ -146,6 +141,10 @@ export default function channel({ gateway }) {
         }
 
     })
+
+    function URLBarUtils(change) {
+        window.history.replaceState({}, null, `http://localhost:3000/channels/${change}`)
+    }
 
 
     function changeServer(id) {
@@ -160,14 +159,15 @@ export default function channel({ gateway }) {
             else {
                 setGuild(guild);
 
-                setChannel(guild.dfchn)
+                setChannel(guild.channels.find(x => x.id == guild.dfchn));
                 getMessages(guild.dfchn, gateway).then(msgs => {
-                    setIds({ guild: id, channel: guild.dfnchn })
+                    setIds({ guild: id, channel: guild.dfchn })
                     setLoading(false)
                     setMessages(msgs)
                     setLoadingMessages(false)
 
                     setIsHome(false)
+                    URLBarUtils(`${guild.id}/${guild.dfchn}`)
 
                     try {
                         let msgd = document.getElementById('messages');
@@ -186,11 +186,13 @@ export default function channel({ gateway }) {
         setLoadingMessages(true)
         id = String(id)
         setChannel(guild.channels.find(x => x.id == id));
+        setIds({ guild: ids.guild, channel: id })
 
         getMessages(id, gateway).then(msgs => {
             setLoading(false)
             setMessages(msgs)
             setLoadingMessages(false)
+            URLBarUtils(`${guild.id}/${id}`)
 
 
             let msgd = document.getElementById('messages');
@@ -199,14 +201,22 @@ export default function channel({ gateway }) {
         })
     }
 
-    console.log(loading)
-
 
     if (loading) return <Loading />
 
 
+
+
     return (
         <>
+
+            {
+                document.addEventListener('keydown', evt => {
+                    if(document.activeElement.tagName !== 'INPUT') document.getElementById('chatbox_input').focus()
+
+                    return true;
+                })
+            }
 
 
             <ServerBar user={user} change={changeServer} home={() => { setIsHome(true); setChannel({ name: 'Home' }); setGuild({ name: 'Hangle' }) }} />
@@ -245,7 +255,7 @@ export default function channel({ gateway }) {
 
 
 
-            { isHome ? null : <ChatBox gateway={gateway} ids={ids} />}
+            { isHome ? null : <ChatBox gateway={gateway} ids={channel} />}
 
         </>
     );

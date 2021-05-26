@@ -2,9 +2,6 @@
 
 export default function ServerBar({ user, change, home }) {
 
-
-    console.log(user)
-
     return (
         <div id="serverbar">
             <div id="atme">
