@@ -78,7 +78,7 @@ export default function Messages({ messages }) {
                             <p className="messageContent"> {join} </p>
 
                             {
-                                isValidImageURL(getURL(simpleJoin))
+                                isValidImageURL(getURL(simpleJoin)) && (getURL(simpleJoin)).match(/(cdn\.discordapp\.com|cdn\.hangle\.me)/gm)
                                     ?
                                     <>
                                         <br />

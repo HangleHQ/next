@@ -212,6 +212,9 @@ export default function channel({ gateway }) {
 
             {
                 document.addEventListener('keydown', evt => {
+                    console.log(evt);
+                    if(isHome || evt.ctrlKey || evt.shiftKey || evt.key === 'Control') return evt.preventDefault();
+
                     if(document.activeElement.tagName !== 'INPUT') document.getElementById('chatbox_input').focus()
 
                     return true;
