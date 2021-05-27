@@ -66,14 +66,6 @@
     "@hapi/boom" "9.x.x"
     "@hapi/hoek" "9.x.x"
 
-"@hapi/accept@5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.2.tgz#ab7043b037e68b722f93f376afb05e85c0699523"
-  integrity sha512-CmzBx/bXUR8451fnZRuZAJRlzgm0Jgu5dltTX/bszmR2lheb9BpyN47Q1RbaGTsvFzn0PXAEs+lXDKfshccYZw==
-  dependencies:
-    "@hapi/boom" "9.x.x"
-    "@hapi/hoek" "9.x.x"
-
 "@hapi/boom@9.x.x":
   version "9.1.2"
   resolved "https://registry.yarnpkg.com/@hapi/boom/-/boom-9.1.2.tgz#48bd41d67437164a2d636e3b5bc954f8c8dc5e38"
@@ -183,11 +175,6 @@
     source-map "0.8.0-beta.0"
     stacktrace-parser "0.1.10"
     strip-ansi "6.0.0"
-
-"@next/react-refresh-utils@10.2.3":
-  version "10.2.3"
-  resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-10.2.3.tgz#2f3e42fe6680798f276e3621345c2886b231348b"
-  integrity sha512-qtBF56vPC6d6a8p7LYd0iRjW89fhY80kAIzmj+VonvIGjK/nymBjcFUhbKiMFqlhsarCksnhwX+Zmn95Dw9qvA==
 
 "@next/react-refresh-utils@10.2.3":
   version "10.2.3"
@@ -593,11 +580,6 @@ camelcase-css@^2.0.1:
   integrity sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==
 
 caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001202, caniuse-lite@^1.0.30001219, caniuse-lite@^1.0.30001228:
-  version "1.0.30001230"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001230.tgz#8135c57459854b2240b57a4a6786044bdc5a9f71"
-  integrity sha512-5yBd5nWCBS+jWKTcHOzXwo5xzcj4ePE/yjtkZyUV1BTUmrBaA9MRGC+e7mxnqXSA90CmCA8L3eKLaSUkt099IQ==
-
-caniuse-lite@^1.0.30001228:
   version "1.0.30001230"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001230.tgz#8135c57459854b2240b57a4a6786044bdc5a9f71"
   integrity sha512-5yBd5nWCBS+jWKTcHOzXwo5xzcj4ePE/yjtkZyUV1BTUmrBaA9MRGC+e7mxnqXSA90CmCA8L3eKLaSUkt099IQ==
@@ -1696,66 +1678,10 @@ native-url@0.3.4:
   dependencies:
     querystring "^0.2.0"
 
-next@*:
+next@*, next@10.2.3:
   version "10.2.3"
   resolved "https://registry.yarnpkg.com/next/-/next-10.2.3.tgz#5aa058a63626338cea91c198fda8f2715c058394"
   integrity sha512-dkM1mIfnORtGyzw/Yme8RdqNxlCMZyi4Lqj56F01/yHbe1ZtOaJ0cyqqRB4RGiPhjGGh0319f8ddjDyO1605Ow==
-  dependencies:
-    "@babel/runtime" "7.12.5"
-    "@hapi/accept" "5.0.2"
-    "@next/env" "10.2.3"
-    "@next/polyfill-module" "10.2.3"
-    "@next/react-dev-overlay" "10.2.3"
-    "@next/react-refresh-utils" "10.2.3"
-    "@opentelemetry/api" "0.14.0"
-    assert "2.0.0"
-    ast-types "0.13.2"
-    browserify-zlib "0.2.0"
-    browserslist "4.16.6"
-    buffer "5.6.0"
-    caniuse-lite "^1.0.30001228"
-    chalk "2.4.2"
-    chokidar "3.5.1"
-    constants-browserify "1.0.0"
-    crypto-browserify "3.12.0"
-    cssnano-simple "2.0.0"
-    domain-browser "4.19.0"
-    encoding "0.1.13"
-    etag "1.8.1"
-    find-cache-dir "3.3.1"
-    get-orientation "1.1.2"
-    https-browserify "1.0.0"
-    jest-worker "27.0.0-next.5"
-    native-url "0.3.4"
-    node-fetch "2.6.1"
-    node-html-parser "1.4.9"
-    node-libs-browser "^2.2.1"
-    os-browserify "0.3.0"
-    p-limit "3.1.0"
-    path-browserify "1.0.1"
-    pnp-webpack-plugin "1.6.4"
-    postcss "8.2.13"
-    process "0.11.10"
-    prop-types "15.7.2"
-    querystring-es3 "0.2.1"
-    raw-body "2.4.1"
-    react-is "16.13.1"
-    react-refresh "0.8.3"
-    stream-browserify "3.0.0"
-    stream-http "3.1.1"
-    string_decoder "1.3.0"
-    styled-jsx "3.3.2"
-    timers-browserify "2.0.12"
-    tty-browserify "0.0.1"
-    use-subscription "1.5.1"
-    util "0.12.3"
-    vm-browserify "1.1.2"
-    watchpack "2.1.1"
-
-next@10.2.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/next/-/next-10.2.0.tgz#6654cc925d8abcb15474fa062fc6b3ee527dd6dc"
-  integrity sha512-PKDKCSF7s82xudu3kQhOEaokxggpbLEWouEUtzP6OqV0YqKYHF+Ff+BFLycEem8ixtTM2M6ElN0VRJcskJfxPQ==
   dependencies:
     "@babel/runtime" "7.12.5"
     "@hapi/accept" "5.0.2"
@@ -2092,14 +2018,14 @@ postcss-value-parser@^4.1.0:
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.1.0.tgz#443f6a20ced6481a2bda4fa8532a6e55d789a2cb"
   integrity sha512-97DXOFbQJhk71ne5/Mt6cOu6yxsSfM0QGQyl0L25Gca4yGWEGJaig7l7gbCX623VqTBNGLRLaVUCnNkcedlRSQ==
 
-postcss@8, postcss@^8.2.1:
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.3.0.tgz#b1a713f6172ca427e3f05ef1303de8b65683325f"
-  integrity sha512-+ogXpdAjWGa+fdYY5BQ96V/6tAo+TdSSIMP5huJBIygdWwKtVoB5JWZ7yUd4xZ8r+8Kvvx4nyg/PQ071H4UtcQ==
+postcss@8.2.10:
+  version "8.2.10"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.10.tgz#ca7a042aa8aff494b334d0ff3e9e77079f6f702b"
+  integrity sha512-b/h7CPV7QEdrqIxtAf2j31U5ef05uBDuvoXv6L51Q4rcS1jdlXAVKJv+atCFdUXYl9dyTHGyoMzIepwowRJjFw==
   dependencies:
     colorette "^1.2.2"
-    nanoid "^3.1.23"
-    source-map-js "^0.6.2"
+    nanoid "^3.1.22"
+    source-map "^0.6.1"
 
 postcss@8.2.13:
   version "8.2.13"
@@ -2127,6 +2053,15 @@ postcss@^7, postcss@^7.0.18, postcss@^7.0.32:
     chalk "^2.4.2"
     source-map "^0.6.1"
     supports-color "^6.1.0"
+
+postcss@^8.2.1:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.3.0.tgz#b1a713f6172ca427e3f05ef1303de8b65683325f"
+  integrity sha512-+ogXpdAjWGa+fdYY5BQ96V/6tAo+TdSSIMP5huJBIygdWwKtVoB5JWZ7yUd4xZ8r+8Kvvx4nyg/PQ071H4UtcQ==
+  dependencies:
+    colorette "^1.2.2"
+    nanoid "^3.1.23"
+    source-map-js "^0.6.2"
 
 pretty-hrtime@^1.0.3:
   version "1.0.3"
