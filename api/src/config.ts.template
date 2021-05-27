@@ -3,5 +3,6 @@ export const config = {
     githubClientSecret: '',
     mongodburi: '',
     githubCallback: 'http://127.0.0.1/auth/github/callback',
-    cryptoKey: ''
+    cryptoKey: '',
+    sessionSecret: ''
 }
