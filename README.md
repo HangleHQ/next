@@ -1,4 +1,4 @@
-# Hnagle / Next
+# Hangle / Next
 
 next version of hangle in nextjs
 
