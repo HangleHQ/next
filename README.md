@@ -8,7 +8,7 @@ Thanks!
 
 # Branches
 
-`staging` -> pr this 
+`staging` -> pr this <br />
 `master` -> version that runs on prod
 
 # API
