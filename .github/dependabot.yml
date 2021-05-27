@@ -1,0 +1,7 @@
+version: 2
+updates:
+  - package-ecosystem: "npm" 
+    directory: "/frontend" 
+    target-branch: "staging"
+    schedule:
+      interval: "daily"
