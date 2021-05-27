@@ -5,14 +5,9 @@ import '../styles/msg.css'
 import '../styles/chatbox.css'
 import '../styles/loading.css'
 import '../styles/landing.css'
-import '../styles/electron-header.css'
 
 
-
-import isElectron from 'is-electron'
 import React from 'react';
-import { ElectronHeader } from '../components/ElectronHeader'
-
 
 interface config {
   API_URL: string,
@@ -63,23 +58,7 @@ function Hangle({ Component, pageProps }) {
      * we do a little electron
      */
 
-    let electron = isElectron();
-
-    return (
-      <>
-
-        <ElectronHeader />
-        { electron ? <br /> : null}
-
-        <Component
-          {...pageProps}
-          gateway={wss}
-
-        />
-
-      </>
-
-    )
+    return <Component {...pageProps} gateway={wss} />
 
 
   } else return null

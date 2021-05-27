@@ -143,7 +143,7 @@ export default function channel({ gateway }) {
     })
 
     function URLBarUtils(change) {
-        window.history.replaceState({}, null, `http://localhost:3000/channels/${change}`)
+        window.history.replaceState({}, null, `${window.CONFIG.BASE_URL}/channels/${change}`)
     }
 
 
@@ -213,7 +213,7 @@ export default function channel({ gateway }) {
             {
                 document.addEventListener('keydown', evt => {
                     console.log(evt);
-                    if(isHome || evt.ctrlKey || evt.shiftKey || evt.key === 'Control') return evt.preventDefault();
+                    if(isHome || evt.ctrlKey || evt.shiftKey || evt.key === 'Control') return true;
 
                     if(document.activeElement.tagName !== 'INPUT') document.getElementById('chatbox_input').focus()
 
