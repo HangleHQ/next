@@ -1,0 +1,17 @@
+{
+  "name": "gateway",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsc && node dist"
+  },
+  "dependencies": {
+    "@types/crypto-js": "^4.0.1",
+    "@types/mongoose": "^5.10.5",
+    "@types/ws": "^7.4.4",
+    "crypto-js": "^4.0.0",
+    "mongoose": "^5.12.11",
+    "ws": "^7.4.6"
+  }
+}

@@ -14,7 +14,7 @@ import ChannelMap from './ChannelMap'
 import Messages from './msg/Messages';
 import ChatBox from './ChatBox'
 
-export default function channel({ gateway }) {
+export default function channel({ gateway, user }) {
 
     /**
      * local vars
@@ -33,7 +33,7 @@ export default function channel({ gateway }) {
     // guild / channel / user related
     let [guild, setGuild] = React.useState<Guild>({})
     let [channel, setChannel] = React.useState<Channel>({})
-    let [user, setUser] = React.useState<any>({}) // for now use any cuz im lazy
+    let [gatewayUser, setUser] = React.useState<any>({}) // for now use any cuz im lazy
     let [messages, setMessages] = React.useState([]);
 
     let [ids, setIds] = React.useState<IDS>({})
@@ -85,9 +85,7 @@ export default function channel({ gateway }) {
         } else {
             if (!ids.guild) return;
 
-            getGuild(ids.guild, gateway).then(guild => {
-                if (guild._error) console.log('INVALID SERVER');
-                else {
+            getGuild(ids.guild).then((guild: Guild) => {
                     setGuild(guild);
                     let c = guild.channels.find(x => x.id == ids.channel)
 
@@ -99,9 +97,9 @@ export default function channel({ gateway }) {
                             URLBarUtils('me')
                             return
                         }
-                        getMessages(c.id, gateway).then(msgs => {
+                        getMessages(c.id).then(msgs => {
                             setLoading(false)
-                            setMessages(msgs)
+                            setMessages(msgs as any)
                             setLoadingMessages(false)
 
 
@@ -114,7 +112,6 @@ export default function channel({ gateway }) {
 
                     })
 
-                }
             })
 
         }
@@ -154,20 +151,18 @@ export default function channel({ gateway }) {
 
 
 
-        getGuild(ids.guild, gateway).then(guild => {
-            if (guild._error) console.log('INVALID SERVER');
-            else {
+        getGuild(ids.guild).then((guild: Guild) => {
                 setGuild(guild);
 
-                setChannel(guild.channels.find(x => x.id == guild.dfchn));
-                getMessages(guild.dfchn, gateway).then(msgs => {
-                    setIds({ guild: id, channel: guild.dfchn })
+                setChannel(guild.channels.find(x => x.id == guild.defaultchannel));
+                getMessages(guild.defaultchannel).then(msgs => {
+                    setIds({ guild: id, channel: guild.defaultchannel })
                     setLoading(false)
-                    setMessages(msgs)
+                    setMessages(msgs as any)
                     setLoadingMessages(false)
 
                     setIsHome(false)
-                    URLBarUtils(`${guild.id}/${guild.dfchn}`)
+                    URLBarUtils(`${guild.id}/${guild.defaultchannel}`)
 
                     try {
                         let msgd = document.getElementById('messages');
@@ -176,8 +171,6 @@ export default function channel({ gateway }) {
                     } catch { }
 
                 })
-
-            }
         })
 
     }
@@ -188,9 +181,9 @@ export default function channel({ gateway }) {
         setChannel(guild.channels.find(x => x.id == id));
         setIds({ guild: ids.guild, channel: id })
 
-        getMessages(id, gateway).then(msgs => {
+        getMessages(id).then(msgs => {
             setLoading(false)
-            setMessages(msgs)
+            setMessages(msgs as any)
             setLoadingMessages(false)
             URLBarUtils(`${guild.id}/${id}`)
 
@@ -222,7 +215,7 @@ export default function channel({ gateway }) {
             }
 
 
-            <ServerBar user={user} change={changeServer} home={() => { setIsHome(true); setChannel({ name: 'Home' }); setGuild({ name: 'Hangle' }) }} />
+            <ServerBar user={gatewayUser} change={changeServer} home={() => { setIsHome(true); setChannel({ name: 'Home' }); setGuild({ name: 'Hangle' }) }} />
 
             <ChannelBar channel={{ name: LoadingMessages ? 'loading' : channel?.name || 'error-5044' }} guild={guild} />
 

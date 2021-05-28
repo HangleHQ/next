@@ -11,6 +11,8 @@ interface Guild {
     name?: string,
     members?: GuildMember[], // -> Array of filled with GuildMember
     channels?: any[],
+    defaultchannel?: string,
+
 }
 
 
@@ -24,5 +26,13 @@ interface IDS {
     guild?: string,
 }
 
+interface User {
+    id: string,
+    displayName: string,
+    accessToken: string,
+    username: string,
+    servers: Guild[],
+}
 
-export type { Guild, GuildMember, Channel, IDS }
+
+export type { Guild, GuildMember, Channel, IDS, User }

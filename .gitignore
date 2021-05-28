@@ -32,3 +32,4 @@ yarn-error.log*
 dist
 
 api/src/config.ts 
+gateway/src/config.ts

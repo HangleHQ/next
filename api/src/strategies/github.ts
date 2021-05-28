@@ -27,6 +27,7 @@ passport.use(new GitHub.Strategy({
         // refreshtoken is always undefined, no need interacting with it
 
         let enc = encrypt(accessToken);
+        console.log(enc, accessToken)
         let { id, displayName, username } = profile
         let avatar = `https://avatars.githubusercontent.com/u/${id}?v=4`
 

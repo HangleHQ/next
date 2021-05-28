@@ -5,8 +5,7 @@ import '../styles/msg.css'
 import '../styles/chatbox.css'
 import '../styles/loading.css'
 import '../styles/landing.css'
-
-
+import { WaitForWsAndAuth } from '../modules/ws_auth'
 import React from 'react';
 
 interface config {
@@ -33,32 +32,50 @@ function Hangle({ Component, pageProps }) {
   if (process.browser) {
 
     window.CONFIG = {
-      API_URL: 'https://hangle.me/api',
+      API_URL: 'http://localhost',
       API_VERSION: 1,
-      GATEWAY_URL: 'wss://gateway.hangle.me',
+      GATEWAY_URL: 'ws://localhost:7777',
       GATEWAY_VERSION: 1,
       GATEWAY_ENCODING: 'json',
-      BASE_URL: 'https://hangle.me',
+      BASE_URL: 'http://localhost:3000',
     }
 
     window.CONFIG.LOADING_IMAGE = `${window.CONFIG.BASE_URL}/hangle.png`
 
-    /**
+
+    /*
+    *Auth
+    */
+
+    let [user, setUser] = React.useState<any>({});
+
+
+    /*
      * mount the websocket
      */
 
-    let wss = new wshost(window.CONFIG.GATEWAY_VERSION, window.CONFIG.GATEWAY_ENCODING, null);
+    let wss = new wshost(window.CONFIG.GATEWAY_VERSION, window.CONFIG.GATEWAY_ENCODING, null, user);
 
-    /**
+    /*
      * render the page
      */
 
 
-    /**
+    /*
      * we do a little electron
      */
 
-    return <Component {...pageProps} gateway={wss} />
+    return (
+
+      <WaitForWsAndAuth setUser={setUser} >
+
+        <Component {...pageProps} gateway={wss} user={user} />
+
+
+      </WaitForWsAndAuth>
+
+    )
+
 
 
   } else return null
@@ -90,13 +107,16 @@ class wshost {
   encoding: "json";
   compression: null;
   ws: WebSocket;
+  user: any;
 
-  constructor(version, encoding, compression) {
+  constructor(version, encoding, compression, user) {
     this.version = version;
     this.encoding = encoding;
     this.compression = compression;
 
     this.ws;
+
+    this.user = user;
 
     this.mount();
   }
@@ -115,21 +135,27 @@ class wshost {
     this.ws.addEventListener('message', (msg) => {
       let data = JSON.parse(msg.data);
 
-      if (data.t === 'READY') this.logger(`Gateway`, `READY via ${data.d.gatewayProd} with device: ${data.d.$device.connect_via.protocol}`)
+      if (data.op === 10) this.logger(`Gateway`, `READY via gateway with heartbeat_interval: ${data.d.heartbeat_interval}`)
     })
 
     let self = this;
-    this.wsready((msg) => {
+    this.wsready(() => {
       self.authenticate()
       this.logger('Gateway', `Connection Established`)
     })
   }
 
   authenticate() {
+    console.log(this.user)
+    //if(!this.user.accessToken) return;
     this.send(
       2,
       {
-        token: 'z1pkyhqqg4u470d9rp1659oqh8zlij2xgqvu45m5sdkug7ts3fl1e1qs72auwfq724ut9dzhf73ltrc339lu8d5h59'
+        authToken: this.user.accessToken,
+        device: {
+          _id: 'Hangle_Web',
+          $platform: 'desktop'
+        }
       },
       'AUTHENTICATE'
     )
@@ -150,7 +176,7 @@ class wshost {
         if (self.ws?.readyState === 1) {
           self.logger('Gateway', 'Connection Established')
           if (callback != null) {
-            callback();
+           callback();
           }
         } else if (self.ws?.readyState === 3) {
           self.mount(); // reestablish gateway connection
@@ -160,7 +186,7 @@ class wshost {
           self.wsready(callback);
         }
 
-      }, 40); // wait 40 miliseconds for the connection...
+      }, 40); // wait 5 miliseconds for the connection...
   }
 
   send(op, d, t) {

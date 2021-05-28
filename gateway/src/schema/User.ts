@@ -1,12 +1,10 @@
 import { Schema, model } from 'mongoose';
 
-
-export default model('user', new Schema({
+export const user = model('user', new Schema({
     _id: String, // _id & id are the same
     username: String,
     avatar: String,
     displayName: String,
-    id: String,
     Token: String,
     additional: Object,
     isverified: Boolean,
@@ -25,4 +23,5 @@ export default model('user', new Schema({
     phoneNumber: String,
     privacySettings: Array,
     badges: Array,
+    accessToken: String,
 }))

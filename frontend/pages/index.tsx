@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
+import axios from 'axios'
 
 
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -13,7 +14,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 
 
-export default function Landing() {
+export default function Landing({ user }) {
 
     return (
         <div id="landing">
@@ -38,10 +39,16 @@ export default function Landing() {
                     </span>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                    <span id="loginButton" onClick={() => {window.location.href = 'http://localhost/auth/github'}}>
-                        Login
+                        {
+                        user ? <span onClick={() => { window.location.href = `${window.CONFIG.BASE_URL}/channels/me` }}>
+                            Open Hangle
+                        </span>
+                            :
+                            <span id="loginButton" onClick={() => { window.location.href = 'http://localhost/auth/github' }}>
+                                Login
                     </span>
+
+                    }
 
                     &nbsp;&nbsp;&nbsp;
                     <span className="vertDiv" />
@@ -66,33 +73,6 @@ export default function Landing() {
                     yo dude want some candies???
                 </div>
 
-<br />
-
-                <div id="landingSignup">
-                    <Formik
-                    initialValues={{}}
-                    onSubmit={(evt: any, actions) => {
-                        console.log(evt.username)
-                    }}
-                    >
-                        {props => (
-
-                            <form onSubmit={props.handleSubmit}>
-
-                                <input
-                                placeholder=" Enter a username"
-                                onChange={props.handleChange}
-                                name="username"
-                                autoComplete="off"
-                                />
-
-                                <button type="submit" className="signupButton" > <ArrowForwardIcon /> </button>
-
-                            </form>
-                        )}
-                    </Formik>
-
-                </div>
             </div>
         </div>
     )

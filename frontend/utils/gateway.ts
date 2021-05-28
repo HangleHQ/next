@@ -1,17 +1,31 @@
+import axios from "axios"
+import { Guild, User } from "../types"
 
 
 
 
-async function getGuild(id: string, wshost) {
-    return await wshost.runQuery('get_server', { server: { id } })
+async function getGuild(id: string) {
+    return new Promise((res, rej) => {
+        axios.get(`${window.CONFIG.API_URL}/communities/${id}`, { withCredentials: true })
+        .then(({ data }) => { res(data as Guild) })
+        .catch() // TODO: error catching
+    })
 }
 
 async function getUser(wshost) {
-    return await wshost.runOp(8, {}, 'GET_USER')
+    return new Promise((res, rej) => {
+        axios.get(`${window.CONFIG.API_URL}/users/me`, { withCredentials: true })
+        .then(({ data }) => { res(data as User) })
+        .catch() // TODO: error catching
+    })
 }
 
-async function getMessages(channelId: string, wshost) {
-    return await wshost.runQuery('GET_MESSAGES', { channel: { id: channelId }})
+async function getMessages(channelId: string) {
+    return new Promise((res, rej) => {
+        axios.get(`${window.CONFIG.API_URL}/rooms/${channelId}/messages`, { withCredentials: true })
+        .then(({ data }) => { res(data as any) })
+        .catch() // TODO: error catching
+    })
 }
 
 export {

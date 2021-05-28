@@ -57,7 +57,7 @@ export default function Messages({ messages }) {
                     })
 
                     return (
-                        <div className={`message ${arr[i - 1]?.author?.id === m?.author?.id ? 'inline' : 'withAuthor'}`} >
+                        <div className={`message ${arr[i - 1]?.author?.id === m?.author?.id ? 'inline' : 'withAuthor'}`} key={i}>
                             <div className="messageAuthor">
                                 {
                                     arr[i - 1]?.author?.id === m?.author?.id ? null : <> { /** Message inline thing */}

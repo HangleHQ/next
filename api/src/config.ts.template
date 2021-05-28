@@ -2,7 +2,7 @@ export const config = {
     githubClientID: '',
     githubClientSecret: '',
     mongodburi: '',
-    githubCallback: 'http://127.0.0.1/auth/github/callback',
+    githubCallback: 'http://localhost/auth/github/callback',
     cryptoKey: '',
     sessionSecret: ''
 }
