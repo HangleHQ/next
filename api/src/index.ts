@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import cm from 'connect-mongo'
 import routes from './routes';
 import { config } from './config'
+import ratelimits from './ratelimits'
 
 mongoose.connect(config.mongodburi, {
     useNewUrlParser: true,
@@ -36,6 +37,9 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
+
+
+app.use('/', ratelimits)
 
 app.use('/', routes)
 
