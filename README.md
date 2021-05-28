@@ -14,3 +14,7 @@ Thanks!
 # API
 
 for editing the api fill out the [config](api/src/config.ts.template) file and rename it to `config.ts`
+
+# gateway 
+
+same as for the api
