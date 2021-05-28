@@ -30,7 +30,7 @@
   "devDependencies": {
     "@types/react": "^17.0.5",
     "autoprefixer": "9",
-    "postcss": "8",
+    "postcss": "8.2.10",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "^4.3.2"
   }

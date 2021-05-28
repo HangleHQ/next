@@ -1,11 +1,16 @@
-# Hangle / Next
+# Hangle v0.1.x
 
-next version of hangle in nextjs
+The second major version of Hangle's testing build, now written in Next.js.
 
-if you're looking for the `/channels/:id | me` render look [here](frontend/components/MainChatRender.tsx)
+This project is open sourced, please see the [contributing](CONTRIBUTING.md) guide to contribute to Hangle.
 
-i dont really know what to put kthx 
+Thanks!
 
-oh pull request staging 
+# Branches
 
-master is prod 
+`staging` -> pr this <br />
+`master` -> version that runs on prod
+
+# API
+
+for editing the api fill out the [config](api/src/config.ts.template) file and rename it to `config.ts`

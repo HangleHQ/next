@@ -39,7 +39,7 @@ export default function Landing() {
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <span id="loginButton">
+                    <span id="loginButton" onClick={() => {window.location.href = 'http://localhost/auth/github'}}>
                         Login
                     </span>
 
