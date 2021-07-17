@@ -1,5 +1,7 @@
-
-@import url(https://fonts.googleapis.com/css2?family=Lexend:wght@100;300;400;500;600;700;800&display=swap);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 input:focus,
 textarea:focus,
@@ -25,7 +27,7 @@ a {
 
 * {
   box-sizing: border-box;
-  font-family: "Lexend", sans-serif;
+  font-family: "Inter", sans-serif;
   user-select: text;
 }
 
@@ -34,22 +36,22 @@ a {
 }
 
 ::selection {
-  background-color: #770811;
+  background-color: #2f79bf;
   border-radius: 4px;
 }
 
 ::-moz-selection {
-  background-color: #770811;
+  background-color: #2f79bf;
   border-radius: 4px;
 }
 
 a:link {
   text-decoration: none !important;
-  color: #d72721;
+  color: #3ABEFF;
 }
 
 a {
-  color: #d72721 !important;
+  color:#3ABEFF !important;
 }
 
 .loading_image img {
@@ -69,4 +71,20 @@ a {
 #homePageContent {
   margin-left: 60px;
   padding: 30px;
+}
+
+h1 {
+  font-size: 45px !important;
+}
+
+h2 {
+  font-size: 30px !important;
+}
+
+.card {
+  width: 400px !important;
+}
+
+.bgs {
+  background-color: #212121 !important;
 }
