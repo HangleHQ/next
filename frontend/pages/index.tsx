@@ -10,7 +10,7 @@ export default function Landing() {
 
     return (
         <div id="landing">
-            You wont any candies here kiddo
+            You wont find any candies here kiddo
         </div>
     )
 
