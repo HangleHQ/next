@@ -14,3 +14,5 @@ Thanks!
 # API
 
 for editing the api fill out the [config](api/src/config.ts.template) file and rename it to `config.ts`
+
+I'm putting this here to force Vercel to deploy
