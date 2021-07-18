@@ -85,6 +85,8 @@ h2 {
 
 .card {
   width: 400px !important;
+  padding: 0.5rem !important;
+  border-radius: 0.375rem;
 }
 
 .bgs {

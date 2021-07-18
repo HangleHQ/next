@@ -19,7 +19,7 @@ export default function Loading() {
                     <br />
                     <br />
                     <Image id="hanglespin" src="/hangle.png" width="400" height="400"/>
-                    <div className="card p-3 rounded-md m-4 text-blue bgs" id="didyouknowtitle">
+                    <div className="card bgs" id="didyouknowtitle">
                     <h1 className="bgs" id="didyouknowbody">Did you know</h1>
                     <p className="bgs">
                        {tips[Math.floor(Math.random() * tips.length)]}
