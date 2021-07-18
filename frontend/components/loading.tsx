@@ -6,8 +6,8 @@ import { useEffect } from "react";
 export default function Loading() {
     useEffect(() => {
         setTimeout(() => {
-        document.getElementById('didyouknowtitle').innerHTML = "This is taking longer than expected"
-        document.getElementById('didyouknowbody').innerHTML = "Make sure you have an active internet connection and are running a stable version of Hangle."
+        document.getElementById('didyouknowtitle').innerHTML = "This is taking longer than expected, make sure you are connected to the internet and are running a stable version of Hangle"
+        document.getElementById('didyouknowbody').innerHTML = ""
     }, 10000)
     },[])
     return (
