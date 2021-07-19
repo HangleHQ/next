@@ -1,6 +1,4 @@
-
-
-export default function ServerBar({ user, change, home }) {
+export default function ServerBar({ user, change, home, setCreatingServer, isCreating }) {
 
     return (
         <div id="serverbar">
@@ -33,6 +31,12 @@ export default function ServerBar({ user, change, home }) {
                     }
                 })
             }
+            <div className="noGuildIcon" onClick={() => { if(!isCreating) setCreatingServer(true); }}>
+                <div className="noGuildIconItemWrapper">
+                    <span className="noGuildIconText"> Create </span>
+                </div>
+            </div>
+
         </div>
     )
 }

@@ -2,13 +2,25 @@ import { HangleWebSocket } from './types'
 
 import {
     user
-} from './schema'
+} from '../schema'
 import { Server } from 'ws'
+import { GatewayHost } from '.'
+import { generateID } from './utils'
 
-export function MessageHandler(ws: HangleWebSocket, wss: Server) {
+export function MessageHandler(ws: HangleWebSocket, wss: Server, host: GatewayHost) {
     /**
      * general websocket manager
      */
+
+
+
+    host.on(`COMMUNITY_CREATE`, console.log); // any api related events
+
+    /*
+    * for example `COMMUNITY_CREATE` 
+    */
+
+
 
     function wsend(d: any) { ws.send(JSON.stringify(d)) }
 
@@ -23,17 +35,6 @@ export function MessageHandler(ws: HangleWebSocket, wss: Server) {
     }
 
     wsend({ op: 10, d: { heartbeat_interval: 41250 } }) // * send HELLO op 
-
-    function generateID() {
-        let date = Date.now() - 1609459200 * 1000;
-        let num: number = 0;
-
-
-        ws.ids ? ws.ids++ : ws.ids = 0;
-        num += date;
-        num += ws.ids;
-        return num;
-    }
 
     ws.on('message', async function (data) {
         let msg = JSON.parse((data as string));
@@ -73,7 +74,7 @@ export function MessageHandler(ws: HangleWebSocket, wss: Server) {
                 break;
 
             case 5:
-                let id = generateID();
+                let id = generateID(ws);
 
                 let content: any[] = [];
                 let msgd = msg.d.message.content;

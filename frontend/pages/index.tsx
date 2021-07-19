@@ -40,7 +40,9 @@ export default function Landing({ user }) {
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         {
-                        user ? <span onClick={() => { window.location.href = `${window.CONFIG.BASE_URL}/channels/me` }}>
+                        user ? <span
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => { window.location.href = `${window.CONFIG.BASE_URL}/channels/me` }}>
                             Open Hangle
                         </span>
                             :

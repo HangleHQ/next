@@ -8,6 +8,7 @@ import cm from 'connect-mongo'
 import routes from './routes';
 import { config } from './config'
 import ratelimits from './ratelimits'
+import { GatewayHost } from './gateway'
 
 mongoose.connect(config.mongodburi, {
     useNewUrlParser: true,
@@ -41,6 +42,25 @@ app.use(passport.session())
 
 app.use('/', ratelimits)
 
+app.use('/', (req, res, next) => {
+    if(!req.user && !req.path.includes('auth')) return res.send({ message: 'Unauthorized', code: 0 })
+
+    return next();
+})
+
 app.use('/', routes)
 
-app.listen(80)
+app.listen(80);
+
+declare global {
+    namespace NodeJS {
+        export interface Process {
+            gateway: GatewayHost;
+        }
+    }
+}
+
+
+(process as any).gateway = new GatewayHost()
+
+process.gateway.emit('swag')

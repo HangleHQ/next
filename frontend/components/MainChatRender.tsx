@@ -6,7 +6,7 @@ import {
     IDS
 } from '../types'
 import { getGuild, getUser, getMessages } from '../utils/gateway'
-
+import { CreateServer } from './CreateServer'
 import Loading from './loading'
 import ChannelBar from './ChannelBar'
 import ServerBar from './ServerBar'
@@ -40,6 +40,8 @@ export default function channel({ gateway, user }) {
 
 
     let [isHome, setIsHome] = React.useState<boolean | null>(null)
+
+    let [isCreatingServer, setCreatingServer] = React.useState<boolean>(false)
 
     /**
      * useEffects
@@ -86,31 +88,31 @@ export default function channel({ gateway, user }) {
             if (!ids.guild) return;
 
             getGuild(ids.guild).then((guild: Guild) => {
-                    setGuild(guild);
-                    let c = guild.channels.find(x => x.id == ids.channel)
+                setGuild(guild);
+                let c = guild.channels.find(x => x.id == ids.channel)
 
-                    setChannel(c)
-                    getUser(gateway).then(user => {
-                        setUser(user)
-                        if (!c) {
-                            setIsHome(true);
-                            URLBarUtils('me')
-                            return
-                        }
-                        getMessages(c.id).then(msgs => {
-                            setLoading(false)
-                            setMessages(msgs as any)
-                            setLoadingMessages(false)
+                setChannel(c)
+                getUser(gateway).then(user => {
+                    setUser(user)
+                    if (!c) {
+                        setIsHome(true);
+                        URLBarUtils('me')
+                        return
+                    }
+                    getMessages(c.id).then(msgs => {
+                        setLoading(false)
+                        setMessages(msgs as any)
+                        setLoadingMessages(false)
 
 
-                            try {
-                                let msgd = document.getElementById('messages');
-                                if (!msgd) return;
-                                msgd.scrollTop = msgd?.scrollHeight
-                            } catch { }
-                        })
-
+                        try {
+                            let msgd = document.getElementById('messages');
+                            if (!msgd) return;
+                            msgd.scrollTop = msgd?.scrollHeight
+                        } catch { }
                     })
+
+                })
 
             })
 
@@ -152,25 +154,25 @@ export default function channel({ gateway, user }) {
 
 
         getGuild(ids.guild).then((guild: Guild) => {
-                setGuild(guild);
+            setGuild(guild);
 
-                setChannel(guild.channels.find(x => x.id == guild.defaultchannel));
-                getMessages(guild.defaultchannel).then(msgs => {
-                    setIds({ guild: id, channel: guild.defaultchannel })
-                    setLoading(false)
-                    setMessages(msgs as any)
-                    setLoadingMessages(false)
+            setChannel(guild.channels.find(x => x.id == guild.defaultchannel));
+            getMessages(guild.defaultchannel).then(msgs => {
+                setIds({ guild: id, channel: guild.defaultchannel })
+                setLoading(false)
+                setMessages(msgs as any)
+                setLoadingMessages(false)
 
-                    setIsHome(false)
-                    URLBarUtils(`${guild.id}/${guild.defaultchannel}`)
+                setIsHome(false)
+                URLBarUtils(`${guild.id}/${guild.defaultchannel}`)
 
-                    try {
-                        let msgd = document.getElementById('messages');
-                        if (!msgd) return;
-                        msgd.scrollTop = msgd?.scrollHeight
-                    } catch { }
+                try {
+                    let msgd = document.getElementById('messages');
+                    if (!msgd) return;
+                    msgd.scrollTop = msgd?.scrollHeight
+                } catch { }
 
-                })
+            })
         })
 
     }
@@ -206,27 +208,45 @@ export default function channel({ gateway, user }) {
             {
                 document.addEventListener('keydown', evt => {
                     console.log(evt);
-                    if(isHome || evt.ctrlKey || evt.shiftKey || evt.key === 'Control') return true;
+                    if (isHome || evt.ctrlKey || evt.shiftKey || evt.key === 'Control') return true;
 
-                    if(document.activeElement.tagName !== 'INPUT') document.getElementById('chatbox_input').focus()
+                    if (document.activeElement.tagName !== 'INPUT') document.getElementById('chatbox_input').focus()
 
                     return true;
                 })
             }
 
 
-            <ServerBar user={gatewayUser} change={changeServer} home={() => { setIsHome(true); setChannel({ name: 'Home' }); setGuild({ name: 'Hangle' }) }} />
+            {
+                isCreatingServer
+                    ?
+                    <CreateServer user={user} />
+                    :
+                    null
+            }
+
+
+            <ServerBar
+                user={gatewayUser}
+                change={changeServer}
+                home={() => {
+                    setIsHome(true); setChannel({ name: 'Home' });
+                    setGuild({ name: 'Hangle' })
+                }}
+                setCreatingServer={setCreatingServer}
+                isCreating={isCreatingServer}
+            />
 
             <ChannelBar channel={{ name: LoadingMessages ? 'loading' : channel?.name || 'error-5044' }} guild={guild} />
 
-            { isHome ? null : <ChannelMap guild={guild} channel={channel} change={changeChannel} />}
+            {isHome ? null : <ChannelMap guild={guild} channel={channel} change={changeChannel} />}
 
             {
                 isHome ?
                     <>
                         <div id="homePageContent">
                             Hangle... idk bugged af
-                             </div>
+                        </div>
                     </>
                     : <>
 
@@ -251,7 +271,7 @@ export default function channel({ gateway, user }) {
 
 
 
-            { isHome ? null : <ChatBox gateway={gateway} ids={channel} />}
+            {isHome ? null : <ChatBox gateway={gateway} ids={channel} />}
 
         </>
     );

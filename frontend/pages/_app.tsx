@@ -5,6 +5,7 @@ import '../styles/msg.css'
 import '../styles/chatbox.css'
 import '../styles/loading.css'
 import '../styles/landing.css'
+import '../styles/communityCreate.scss'
 import { WaitForWsAndAuth } from '../modules/ws_auth'
 import React from 'react';
 
